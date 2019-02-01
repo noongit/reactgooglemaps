@@ -1,0 +1,164 @@
+html, body, #root {
+    height: 100%;
+    width: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+
+.mainLogoWrapper {
+    display: grid;
+    margin: 5% 0 0 0;
+    grid-template-rows: 1fr 1fr minmax(1fr, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 30%;
+    height: 30%;
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 731px;
+}
+
+.mainLogo {
+    overflow: hidden;
+    max-width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 4;
+}
+
+.App {
+    width: 100%;
+    height: 100%;
+}
+.LogInWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    min-height: 100%;
+    min-width: 100%;
+    flex-direction: column;
+}
+
+.journey {
+    background-color:rgba(227, 227, 227, 0.5);
+    border: none;
+    outline: none;
+    font-size: 25px;
+    padding: 0;
+    height: 30px;
+    min-width: 70px;
+}
+
+.journey:active {
+    color: green;
+}
+.mainLogoWrapper form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    z-index: +1;
+    grid-template-columns: 1fr 1fr;
+    min-width: 120px;
+}
+
+.mainLogoWrapper form input {
+    background-color:rgba(227, 227, 227, 0.5);
+    border: none;
+    margin-bottom: 1px;
+    height: 30px;
+}
+
+
+.mapPage {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: 1fr;
+}
+aside {
+    grid-column-start: 1;
+    width: 100%;
+    height: 100%;
+    background: #282c35;
+    z-index: +5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+aside h2 {
+    color: #52afe8;
+
+}
+.mapWrapper {
+    width: 100%;
+    height: 100%;
+    grid-column-start: 2;
+}
+#map {
+ width: 1fr;
+ height: 1fr;
+
+}
+
+.mapPage form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.mapPage form button {
+    padding: 0;
+    margin-bottom: 5px;
+    height: 40px;
+    width: 80%;
+    background: #52afe8;
+    color: #282c35;
+    font-weight: bolder;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+.mapPage form button:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+.mapPage form button:hover {
+    color: #fff;
+}
+
+.mapPage form .active {
+    color: #fff;
+}
+
+.mapPage form .removal {
+    background-color: #c64f4f;
+}
+.mapPage form .deleteLastPosition {
+    background-color: #f3cc3e;
+}
