@@ -8,7 +8,7 @@ class MapContainer extends Component {
             activeButton:''
         }
     }
-    
+
     setButtonActive = (e) => {
         e.preventDefault();
         this.setState({
