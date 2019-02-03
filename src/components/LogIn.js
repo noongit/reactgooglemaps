@@ -6,34 +6,46 @@ class LogIn extends Component {
     state = {
         LogInButtonState: false,
         userData: {
-            Name: '',
+            Email: '',
             Password: ''
-
         }
     }
+
     LogInButtonClick = (e) => {
         e.preventDefault();
         this.setState({
             LogInButtonState: true
         })
     }
+
+    redirectToHome() {
+        if (this.props.authError === 'success') {
+            this.props.history.push('/Home')
+        }
+    }
+
     UserDataCheck = (e) => {
         e.preventDefault();
-        // if (this.state.Name === 'admin' && this.state.Password ==='admin') {
-        //     this.props.history.push('/Home')
-        // }
-        this.props.logIn(this.state.userData)
+        this.runLogin()
     }
+
+    runLogin(){
+        var scope = this;
+        this.props.logIn(this.state.userData, scope)
+    }
+
     SetUserPass = (e) => {
-        let userData = Object.assign({}, this.state.userData);    //creating copy of object
-        userData.Password = e.target.value;                        //updating value
+        let userData = Object.assign({}, this.state.userData);
+        userData.Password = e.target.value;
         this.setState({userData});
     }
-    SetUserName = (e) => {
-        let userData = Object.assign({}, this.state.userData);    //creating copy of object
-        userData.Name = e.target.value;                        //updating value
+
+    SetUserEmail = (e) => {
+        let userData = Object.assign({}, this.state.userData);
+        userData.Email = e.target.value;
         this.setState({userData});
     }
+
     render () {
         return (
             <div className="LogInWrapper">
@@ -46,7 +58,7 @@ class LogIn extends Component {
                         : null}
                         {this.state.LogInButtonState ?
                             <form onSubmit={this.UserDataCheck}>
-                                <input placeholder="Login" onChange={this.SetUserName}></input>
+                                <input placeholder="Login" onChange={this.SetUserEmail}></input>
                                 <input placeholder="Password" onChange={this.SetUserPass}></input>
                                 <button type="submit" className="journey">Log In</button>
                             </form>
@@ -56,16 +68,18 @@ class LogIn extends Component {
                 )
             }
         }
+
         const mapDispatchToProps = (dispatch) => {
             console.log(dispatch);
             return {
-                logIn: (credents) => dispatch(logIn(credents))
+                logIn: (creds, scope) => dispatch(logIn(creds, scope))
             }
         }
-        //
-        // const setLogInButtonState = (dispatch) => {
-        //     return {
-        //         setState: (nState) => {dispatch({type:'SET_STATE', nState: nState})}
-        //     }
-        // }
-        export default connect(null, mapDispatchToProps)(LogIn)
+
+        const mapStateToProps = (state) => {
+            return {
+                authError: state.auth.authError
+            }
+        }
+
+        export default connect(mapStateToProps, mapDispatchToProps)(LogIn)

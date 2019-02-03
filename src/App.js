@@ -8,11 +8,17 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div className="App">
-                        <Route exact path ='/' component={LogIn} />
-                        <Route path ='/Home' component={Home} />
+                    <Route path ='/Home' component={Home} />
+                    <Route exact path ='/' component={LogIn} />
                 </div>
             </BrowserRouter>
         );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
     }
 }
 

@@ -108,7 +108,7 @@ class MapContaine extends Component {
             })
         }
 
-        deletePath () {
+        deletePath() {
             this.setState({
                 polyline:[]
             })

@@ -1,13 +1,15 @@
-export const logIn = (credentials) => {
-    console.log(credentials);
+export const logIn = (credentials, scope) => {
+    console.log(credentials)
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
-        firebase.auth().signInWithEmailAndPassword(
-            credentials.Password,
-            credentials.Name
-        ).then(()=>{
-            dispatch({type: 'LOGIN_SUCCESS'})
+        let email = credentials.Email,
+            pass = credentials.Password
+        firebase.auth().signInWithEmailAndPassword(email, pass)
+        .then(()=>{
+            dispatch({type: 'LOGIN_SUCCESS'});
+            scope.redirectToHome();
         }).catch((error) =>{
+            console.log(error);
             dispatch({type: 'UNSECCESFUL_LOGIN', error})
         })
     }

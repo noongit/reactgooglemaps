@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MapContaine from './MapComponent'
+import { connect } from 'react-redux';
 class MapContainer extends Component {
     constructor(props){
         super(props)
@@ -123,4 +124,9 @@ class MapContainer extends Component {
         )
     }
 }
-export default MapContainer
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+export default connect(mapStateToProps)(MapContainer)
