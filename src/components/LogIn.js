@@ -70,7 +70,6 @@ class LogIn extends Component {
         }
 
         const mapDispatchToProps = (dispatch) => {
-            console.log(dispatch);
             return {
                 logIn: (creds, scope) => dispatch(logIn(creds, scope))
             }

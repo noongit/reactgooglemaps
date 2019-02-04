@@ -1,5 +1,9 @@
 const initState = {
-    posts:[]
+    position: [],
+    polygonShown:[],
+    polygon:[],
+    polyline:[],
+    markers:[],
 }
 
 const mapReducer = (state = initState, action) => {

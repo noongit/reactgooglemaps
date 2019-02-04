@@ -8,9 +8,9 @@ import {
 } from "react-google-maps"
 
 class MapContaine extends Component {
-    constructor(){
-        super()
-        this.state = {
+    constructor() {
+    super();
+    this.state = {
             position: [],
             polygonShown:[],
             polygon:[],
@@ -20,7 +20,7 @@ class MapContaine extends Component {
                 return (
                     <GoogleMap
                         defaultZoom={14}
-                        defaultCenter={this.props.center}
+                        defaultCenter={{lat: 48.6216429, lng: 22.2974461}}
                         onClick={(e) => this.OnMapClick(e)}
                         >
                         {this.state.markers.map((marker, index) =>(
@@ -50,7 +50,7 @@ class MapContaine extends Component {
                     )
                 })
             }
-        }
+    }
         OnMapClick = (e) => {
             switch (this.props.activeButton) {
                 case "Create Marker":
@@ -123,7 +123,6 @@ class MapContaine extends Component {
                     polygonShown:[...this.state.polygon, this.state.polygon[0]]
                 })
             })
-
         }
 
         deleteLastPosition(){
@@ -154,8 +153,6 @@ class MapContaine extends Component {
                     />
             )
         }
-
-
     }
 
     export default MapContaine

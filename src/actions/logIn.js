@@ -9,7 +9,6 @@ export const logIn = (credentials, scope) => {
             dispatch({type: 'LOGIN_SUCCESS'});
             scope.redirectToHome();
         }).catch((error) =>{
-            console.log(error);
             dispatch({type: 'UNSECCESFUL_LOGIN', error})
         })
     }
