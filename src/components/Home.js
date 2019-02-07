@@ -48,7 +48,7 @@ class MapContainer extends Component {
     }
 
     render() {
-        const aside = this.props.auth.uid ? <Aside
+        const aside = document.cookie ? <Aside
             activeButton={this.state.activeButton}
             setButtonActive={this.setButtonActive}
             deleteMarker={this.deleteMarker}

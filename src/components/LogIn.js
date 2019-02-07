@@ -20,6 +20,7 @@ class LogIn extends Component {
 
     redirectToHome() {
         if (this.props.authError === 'success') {
+            document.cookie = "uid="+this.props.auth.uid;
             this.props.history.push('/Home')
         }
     }
@@ -77,7 +78,8 @@ class LogIn extends Component {
 
         const mapStateToProps = (state) => {
             return {
-                authError: state.auth.authError
+                authError: state.auth.authError,
+                auth: state.firebase.auth
             }
         }
 
