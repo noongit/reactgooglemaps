@@ -133,8 +133,9 @@ aside h2 {
 .mapPage form button {
     padding: 0;
     margin-bottom: 5px;
-    height: 40px;
+    height: 35px;
     width: 80%;
+    min-width: 100px;
     background: #52afe8;
     color: #282c35;
     font-weight: bolder;
@@ -161,4 +162,54 @@ aside h2 {
 }
 .mapPage form .deleteLastPosition {
     background-color: #f3cc3e;
+}
+
+.mapPage form #save {
+    background-color: #45cd59;
+    margin: 0;
+}
+
+.pathForm input{
+    margin: 5px 0 0 0;
+    border: none;
+    width: 95%;
+    height: 30px;
+}
+
+.pathForm ul {
+    margin: 20px 0 0 0;
+    list-style: none;
+}
+
+.pathForm ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 10px 0 5px 0;
+    list-style: none;
+    font-size: 18px;
+    color: #52afe8;
+    height: 300px;
+    overflow:hidden;
+    overflow-y:scroll;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: #52afe8;
+}
+.pathForm ul li {
+    align-items: center;
+    width: 95%;
+    padding: 2px 0 2px 0;
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 3px;
+}
+.pathForm ul li p {
+    margin: 0;
 }

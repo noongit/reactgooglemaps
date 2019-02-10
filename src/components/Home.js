@@ -46,7 +46,7 @@ class MapContainer extends Component {
         e.preventDefault();
         this.child.current.deletePath();
     }
-
+// this.props.history.push('/')
     render() {
         const aside = document.cookie ? <Aside
             activeButton={this.state.activeButton}
@@ -57,7 +57,16 @@ class MapContainer extends Component {
             deleteArea={this.deleteArea}
             deleteAllMarkers={this.deleteAllMarkers}
             deletePath={this.deletePath}
-        /> : this.props.history.push('/');
+        /> : <Aside
+            activeButton={this.state.activeButton}
+            setButtonActive={this.setButtonActive}
+            deleteMarker={this.deleteMarker}
+            deleteLastPolylineCoord={this.deleteLastPolylineCoord}
+            deleteLastPosition={this.deleteLastPosition}
+            deleteArea={this.deleteArea}
+            deleteAllMarkers={this.deleteAllMarkers}
+            deletePath={this.deletePath}
+        />;
         return (
             <div className="mapPage">
                 {aside}
