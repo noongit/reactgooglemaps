@@ -66,38 +66,26 @@ const Aside = (props) => {
                 </form>
                 <form className="pathForm">
                     <button
-                        className={props.activeButton === "Create Polygon" ? 'active' : ''}
                         id = "save"
-                        onClick={(e) => props.setButtonActive(e)}
-                        value="Create Polygon"
+                        onClick={(e) => props.savePath(e)}
                         >Save Path
                     </button>
                     <input></input>
                     <ul>
-                        <li>path</li>
-                        <li>path</li>
-                        <li>path</li>
-                        <li>super mega insane ultra that cant be placed inside 0ne stroke path</li>
-                        <li>path</li>
-                        <li>path</li>
-                        <li>path</li>
-                        <li>path</li>
-                        <li>path</li>
-                        <li>super mega insane ultra that cant be placed inside 0ne stroke path</li>
-                        <li>path</li>
-                        <li>path</li>
+                        <li>something</li>
+                        <li>something</li>
                     </ul>
                     <button
                         className="deleteLastPosition"
-                        onClick={(e) => props.deleteLastPosition(e)}
+                        onClick={(e) => props.loadPath(e)}
                         value="Delete last Position"
                         >Load path
                     </button>
                     <button
                         className="removal"
-                        onClick={(e) => props.deleteArea(e)}
+                        onClick={(e) => props.delete(e)}
                         value="Delete Positions"
-                        >Delete path
+                        >Delete
                     </button>
                 </form>
             </aside>

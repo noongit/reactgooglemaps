@@ -1,5 +1,7 @@
 export const logIn = (credentials, scope) => {
+
     return (dispatch, getState, {getFirebase, getFirestore}) => {
+        console.log(getFirestore())
         const firebase = getFirebase();
         const firestore = getFirestore();
         let email = credentials.Email,

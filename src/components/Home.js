@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import MapContaine from './MapComponent';
 import Aside from './Aside';
 import { connect } from 'react-redux';
+import { firestoreActions } from '../actions/firestoreActions'
+import MapContaine from './MapComponent';
 class MapContainer extends Component {
     constructor(props){
         super(props)
@@ -10,6 +11,7 @@ class MapContainer extends Component {
             activeButton:''
         }
     }
+
     setButtonActive = (e) => {
         e.preventDefault();
         this.setState({
@@ -46,6 +48,16 @@ class MapContainer extends Component {
         e.preventDefault();
         this.child.current.deletePath();
     }
+    savePath = (e) => {
+        e.preventDefault();
+        this.child.current.savePath();
+    }
+    saveCurrentState = (data) => {
+        var scope = this;
+        delete data.InitialMap
+
+        this.props.firestoreActions(data, scope)
+    }
 // this.props.history.push('/')
     render() {
         const aside = document.cookie ? <Aside
@@ -57,6 +69,7 @@ class MapContainer extends Component {
             deleteArea={this.deleteArea}
             deleteAllMarkers={this.deleteAllMarkers}
             deletePath={this.deletePath}
+            savePath = {this.savePath}
         /> : <Aside
             activeButton={this.state.activeButton}
             setButtonActive={this.setButtonActive}
@@ -66,6 +79,7 @@ class MapContainer extends Component {
             deleteArea={this.deleteArea}
             deleteAllMarkers={this.deleteAllMarkers}
             deletePath={this.deletePath}
+            savePath = {this.savePath}
         />;
         return (
             <div className="mapPage">
@@ -74,10 +88,16 @@ class MapContainer extends Component {
                         <MapContaine
                             ref={this.child}
                             activeButton={this.state.activeButton}
+                            saveCurrentState={this.saveCurrentState}
                         />
                 </div>
             </div>
         )
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        firestoreActions: (data, scope) => dispatch(firestoreActions(data, scope))
     }
 }
 const mapStateToProps = (state) => {
@@ -86,4 +106,4 @@ const mapStateToProps = (state) => {
         map: state.map
     }
 }
-export default connect(mapStateToProps)(MapContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer)
