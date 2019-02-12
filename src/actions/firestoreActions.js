@@ -5,6 +5,8 @@ export const firestoreActions = (data, scope) => {
         const firestore = getFirestore();
             firestore.collection('users').doc(''+scope.props.auth.uid).collection('pathes').doc('' + date).set({
                 data
+            }).then(()=>{
+                dispatch({ type: 'DATA_ADDED'})
             })
     }
 }
