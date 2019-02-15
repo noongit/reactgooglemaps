@@ -66,7 +66,7 @@ class MapContainer extends Component {
 
     loadPath = (e) => {
         e.preventDefault();
-        if(this.props.map.activePath){
+        if(this.props.map.pathNames[this.props.map.activePath]){
             this.child.current.loadPath(this.props.map.coords[this.props.map.activePath])
         } else {
             alert('Choose what you want to load')
