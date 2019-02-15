@@ -3,6 +3,7 @@ import Aside from './Aside';
 import { connect } from 'react-redux';
 import { firestoreActions } from '../actions/firestoreActions'
 import MapContaine from './MapComponent';
+
 class MapContainer extends Component {
     constructor(props){
         super(props)
@@ -48,16 +49,30 @@ class MapContainer extends Component {
         e.preventDefault();
         this.child.current.deletePath();
     }
-    savePath = (e) => {
-        e.preventDefault();
-        this.child.current.savePath();
-    }
-    saveCurrentState = (data) => {
-        var scope = this;
-        delete data.InitialMap
 
-        this.props.firestoreActions(data, scope)
+    savePath = (e, saveName) => {
+        e.preventDefault();
+        if(saveName.current.value){
+            this.child.current.savePath(saveName.current.value);
+        } else {
+            alert ('Enter path name')
+        }
     }
+
+    saveCurrentState = (data, saveName) => {
+        var scope = this;
+        this.props.firestoreActions(data, scope, saveName)
+    }
+
+    loadPath = (e) => {
+        e.preventDefault();
+        if(this.props.map.activePath){
+            this.child.current.loadPath(this.props.map.coords[this.props.map.activePath])
+        } else {
+            alert('Choose what you want to load')
+        }
+    }
+
 // this.props.history.push('/')
     render() {
         const aside = document.cookie ? <Aside
@@ -70,6 +85,7 @@ class MapContainer extends Component {
             deleteAllMarkers={this.deleteAllMarkers}
             deletePath={this.deletePath}
             savePath = {this.savePath}
+            loadPath = {this.loadPath}
         /> : <Aside
             activeButton={this.state.activeButton}
             setButtonActive={this.setButtonActive}
@@ -80,6 +96,7 @@ class MapContainer extends Component {
             deleteAllMarkers={this.deleteAllMarkers}
             deletePath={this.deletePath}
             savePath = {this.savePath}
+            loadPath = {this.loadPath}
         />;
         return (
             <div className="mapPage">
@@ -95,15 +112,18 @@ class MapContainer extends Component {
         )
     }
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        firestoreActions: (data, scope) => dispatch(firestoreActions(data, scope))
+        firestoreActions: (data, scope, saveName) => dispatch(firestoreActions(data, scope, saveName))
     }
 }
+
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         map: state.map
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(MapContainer)

@@ -66,8 +66,8 @@ const InitialMap = withGoogleMap(props => {
             }
         }
 
-        savePath(){
-            this.props.saveCurrentState(this.state)
+        savePath(saveName){
+            this.props.saveCurrentState(this.state,saveName)
         }
 
         createMarkers(e) {
@@ -140,6 +140,85 @@ const InitialMap = withGoogleMap(props => {
                 polygonShown: [],
                 polygon:[]
             })
+        }
+
+        loadPath = (coords) => {
+            let markers = this.getMarkers(coords.markers.arrayValue.values),
+            polyline = this.getPolyline(coords.polyline.arrayValue.values),
+            polygonShown = this.getPolygonShown(coords.polygonShown.arrayValue.values),
+            polygon = this.getPolygon(coords.polygon.arrayValue.values)
+            // console.log(coords.markers.arrayValue.values[0].mapValue.fields.lat.doubleValue)
+            this.setState({
+                polygonShown,
+                polygon,
+                polyline,
+                markers
+            })
+        }
+
+        getPolygon(coords) {
+            let polyline = [];
+            if(coords){
+                coords.map(coord => {
+                    polyline = [
+                        ...polyline,
+                        {lat: coord.mapValue.fields.lat.doubleValue, lng:coord.mapValue.fields.lng.doubleValue}
+                    ]
+                })
+            }
+            return polyline
+        }
+
+        getPolygonShown(coords) {
+            let polygonShown = [];
+            if(coords){
+                coords.map(coord => {
+                    polygonShown = [
+                        ...polygonShown,
+                        {lat: coord.mapValue.fields.lat.doubleValue, lng:coord.mapValue.fields.lng.doubleValue}
+                    ]
+                })
+            }
+            return polygonShown
+        }
+
+        getPolyline(coords) {
+            let polyline = [];
+            if(coords){
+                coords.map(coord => {
+                    polyline = [
+                        ...polyline,
+                        {lat: coord.mapValue.fields.lat.doubleValue, lng:coord.mapValue.fields.lng.doubleValue}
+                    ]
+                })
+            }
+            return polyline
+        }
+
+        getPolyline(coords) {
+            let polyline = [];
+            if(coords){
+                coords.map(coord => {
+                    polyline = [
+                        ...polyline,
+                        {lat: coord.mapValue.fields.lat.doubleValue, lng:coord.mapValue.fields.lng.doubleValue}
+                    ]
+                })
+            }
+            return polyline
+        }
+
+        getMarkers(coords) {
+            let markers = [];
+            if(coords){
+                coords.map(coord => {
+                    markers = [
+                        ...markers,
+                        {lat: coord.mapValue.fields.lat.doubleValue, lng:coord.mapValue.fields.lng.doubleValue}
+                    ]
+                })
+            }
+            return markers
         }
 
         render() {

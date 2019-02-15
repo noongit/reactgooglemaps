@@ -1,11 +1,9 @@
-export const firestoreActions = (data, scope, saveName) => {
+export const deleteRecord = (path) => {
     let names = [],
     coords = [];
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firestore = getFirestore();
-        firestore.collection('users').doc(''+scope.props.auth.uid).collection('pathes').doc(saveName).set({
-            data
-        })
+        firestore.collection('users').doc(''+document.cookie.substring(4)).collection('pathes').doc(''+path).delete()
         .then(()=>{
             firestore.collection('users').doc(''+document.cookie.substring(4)).collection('pathes').get()
             .then(snap => {
@@ -21,6 +19,7 @@ export const firestoreActions = (data, scope, saveName) => {
                 dispatch({type: 'DATA_ADDED', names, coords})
             })
         })
+
 
     }
 }
