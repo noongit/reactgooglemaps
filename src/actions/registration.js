@@ -1,4 +1,4 @@
-export const logIn = (credentials, scope) => {
+export const registration = (credentials, scope) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firebase = getFirebase();
         const firestore = getFirestore();

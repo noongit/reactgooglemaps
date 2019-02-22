@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logIn } from '../actions/logIn'
+import { registration } from '../actions/registration'
 class LogIn extends Component {
     state = {
         LogInButtonState: false,
@@ -32,7 +32,7 @@ class LogIn extends Component {
 
     runLogin(){
         var scope = this;
-        this.props.logIn(this.state.userData, scope);
+        this.props.registration(this.state.userData, scope);
     }
 
     SetUserPass = (e) => {
@@ -65,7 +65,8 @@ class LogIn extends Component {
 
     render () {
         return (
-            <div className="LogInWrapper">
+            <div className="logInWrapper">
+                <p>Tip: Enter any valid email and pass to login </p>
                 <div className="mainLogoWrapper" id="mainLogoWrapper" style={{height: this.state.height}}>
                     {!this.state.LogInButtonState ?
                         <form onSubmit={this.LogInButtonClick}>
@@ -87,7 +88,7 @@ class LogIn extends Component {
 
         const mapDispatchToProps = (dispatch) => {
             return {
-                logIn: (creds, scope) => dispatch(logIn(creds, scope))
+                registration: (creds, scope) => dispatch(registration(creds, scope))
             }
         }
 
