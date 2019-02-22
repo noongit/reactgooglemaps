@@ -1,29 +1,38 @@
 export const logIn = (credentials, scope) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
-        console.log(getFirestore())
         const firebase = getFirebase();
         const firestore = getFirestore();
         let email = credentials.Email,
         pass = credentials.Password;
-        function emailExist() {
+
+        function login() {
             firebase.auth().signInWithEmailAndPassword(email, pass)
-            .then(() =>{
-                dispatch({type: 'LOGIN_SUCCESS'});
-                scope.redirectToHome();
-            })
-            .catch((error) =>{
-                dispatch({type: 'UNSECCESFUL_LOGIN', error})
-            })
+                .then((a) =>{
+                    dispatch({type: 'LOGIN_SUCCESS'});
+                    scope.redirectToHome();
+                })
+                .catch((error) =>{
+                    if(error.code === 'auth/wrong-password') {
+                        dispatch({type: 'UNSECCESFUL_LOGIN', error})
+                    } else {
+                        emailExist()
+                    }
+                })
         }
-        firebase.auth().createUserWithEmailAndPassword(email,pass)
-        .then((response) =>{
-            return firestore.collection('users').doc(response.user.uid).set({})
-        })
-        .then(() =>{
-            emailExist()
-        })
-        .catch(() =>{
-            emailExist()
-        })
+
+        login();
+            function emailExist() {
+                firebase.auth().createUserWithEmailAndPassword(email,pass)
+                .then((response) =>{
+                    return firestore.collection('users').doc(response.user.uid).set({})
+                })
+                .then((error) =>{
+                    login()
+                })
+                .catch((error) =>{
+                })
+        }
+
+
     }
 }

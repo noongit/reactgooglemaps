@@ -26,7 +26,11 @@ class Aside extends Component{
 
     delete = (e) =>{
         e.preventDefault();
-        this.props.deleteRecord(this.props.map.pathNames[this.props.map.activePath])
+        if(this.props.map.activePath){
+            this.props.deleteRecord(this.props.map.pathNames[this.props.map.activePath])
+        }else{
+            alert('Choose what to delete')
+        }
     }
 
     render() {
@@ -41,7 +45,6 @@ class Aside extends Component{
                         >Create Marker
                     </button>
                     <button
-                        className="deleteLastPosition"
                         onClick={(e) => this.props.deleteMarker(e)}
                         value="Delete Positions"
                         >Delete marker
@@ -61,13 +64,11 @@ class Aside extends Component{
                         >Create path
                     </button>
                     <button
-                        className="deleteLastPosition"
                         onClick={(e) => this.props.deleteLastPolylineCoord(e)}
                         value="Delete last Position"
                         >Change path
                     </button>
                     <button
-                        className="removal"
                         onClick={(e) => this.props.deletePath(e)}
                         value="Delete Positions"
                         >Delete path
@@ -81,13 +82,11 @@ class Aside extends Component{
                         >Highlight area
                     </button>
                     <button
-                        className="deleteLastPosition"
                         onClick={(e) => this.props.deleteLastPosition(e)}
                         value="Delete last Position"
                         >Delete last position
                     </button>
                     <button
-                        className="removal"
                         onClick={(e) => this.props.deleteArea(e)}
                         value="Delete Positions"
                         >Delete area
@@ -95,29 +94,26 @@ class Aside extends Component{
                 </form>
                 <form className="pathForm">
                     <button
-                        id = "save"
                         onClick={(e) => this.props.savePath(e, this.saveName)}
                         >Save Path
                     </button>
-                    <input ref={this.saveName}></input>
+                    <input ref={this.saveName} maxLength="50"></input>
                     <ul>
                         {this.props.map.pathNames ? this.props.map.pathNames.map((name, index) =>(
                             <li
                                 onClick={(e) => this.choosePath(e,index)}
                                 id={this.props.map.activePath === index ? 'choosenPath' : ''}
                                 key={index}>
-                                {name}
+                                <p>{name}</p>
                             </li>
                         )) : null}
                     </ul>
                     <button
-                        className="deleteLastPosition"
                         onClick={(e) => this.props.loadPath(e)}
                         value="Delete last Position"
                         >Load path
                     </button>
                     <button
-                        className="removal"
                         onClick={(e) => this.delete(e)}
                         value="Delete Positions"
                         >Delete

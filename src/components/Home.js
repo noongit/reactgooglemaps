@@ -52,17 +52,15 @@ class MapContainer extends Component {
 
     savePath = (e, saveName) => {
         e.preventDefault();
+        let mapState = this.child.current.getMapState(),
+        scope = this;
         if(saveName.current.value){
-            this.child.current.savePath(saveName.current.value);
+            this.props.firestoreActions(mapState, scope, saveName.current.value)
         } else {
             alert ('Enter path name')
         }
     }
 
-    saveCurrentState = (data, saveName) => {
-        var scope = this;
-        this.props.firestoreActions(data, scope, saveName)
-    }
 
     loadPath = (e) => {
         e.preventDefault();

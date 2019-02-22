@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import mainLogo from '../img/main.jpg';
 import { connect } from 'react-redux';
 import { logIn } from '../actions/logIn'
 class LogIn extends Component {
@@ -8,7 +7,8 @@ class LogIn extends Component {
         userData: {
             Email: '',
             Password: ''
-        }
+        },
+        height: null
     }
 
     LogInButtonClick = (e) => {
@@ -21,7 +21,7 @@ class LogIn extends Component {
     redirectToHome() {
         if (this.props.authError === 'success') {
             document.cookie = "uid="+this.props.auth.uid;
-            this.props.history.push('/Home')
+            this.props.history.push('/Home');
         }
     }
 
@@ -32,7 +32,7 @@ class LogIn extends Component {
 
     runLogin(){
         var scope = this;
-        this.props.logIn(this.state.userData, scope)
+        this.props.logIn(this.state.userData, scope);
     }
 
     SetUserPass = (e) => {
@@ -47,23 +47,38 @@ class LogIn extends Component {
         this.setState({userData});
     }
 
+    updateDimensions() {
+        let height;
+        if(document.getElementById('mainLogoWrapper')){
+            height = document.getElementById('mainLogoWrapper').offsetWidth;
+        }
+        this.setState({
+            height
+        })
+    }
+
+    componentDidMount() {
+        this.updateDimensions();
+
+        window.addEventListener("resize", this.updateDimensions.bind(this));
+    }
+
     render () {
         return (
             <div className="LogInWrapper">
-                <div className="mainLogoWrapper">
-                    <img className="mainLogo" src={mainLogo}></img>
+                <div className="mainLogoWrapper" id="mainLogoWrapper" style={{height: this.state.height}}>
                     {!this.state.LogInButtonState ?
                         <form onSubmit={this.LogInButtonClick}>
                             <button type="submit" className="journey">Log In</button>
                         </form>
-                        : null}
+                    : null}
                         {this.state.LogInButtonState ?
                             <form onSubmit={this.UserDataCheck}>
                                 <input placeholder="Login" onChange={this.SetUserEmail}></input>
-                                <input placeholder="Password" onChange={this.SetUserPass}></input>
+                                <input type="Password" placeholder="Password" onChange={this.SetUserPass}></input>
                                 <button type="submit" className="journey">Log In</button>
                             </form>
-                            : null}
+                    : null}
                         </div>
                     </div>
                 )
