@@ -41,6 +41,7 @@ code {
 }
 .logInWrapper p {
     color: rgba(82,175,232, 1);
+    padding: 0 10px 0 10px;
 }
 .journey {
     border: none;
@@ -133,7 +134,6 @@ aside h2 {
 #map {
  width: 1fr;
  height: 1fr;
-
 }
 
 .mapPage form {
@@ -144,6 +144,18 @@ aside h2 {
     margin-bottom: 10px;
 }
 
+@media screen and (max-width: 768px) {
+    .mapPage {
+        grid-template-columns: 1fr;
+        grid-template-rows: 400px 1fr;
+    }
+    aside {
+        grid-row-start: 2;
+    }
+    .mapWrapper {
+        grid-column-start: 1;
+    }
+}
 .mapPage form button {
     padding: 0;
     margin-bottom: 5px;
