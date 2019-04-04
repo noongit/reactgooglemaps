@@ -61,7 +61,6 @@ class MapContainer extends Component {
         }
     }
 
-
     loadPath = (e) => {
         e.preventDefault();
         if(this.props.map.pathNames[this.props.map.activePath]){
@@ -71,7 +70,6 @@ class MapContainer extends Component {
         }
     }
 
-// this.props.history.push('/')
     render() {
         const aside = document.cookie ? <Aside
             activeButton={this.state.activeButton}
@@ -84,18 +82,7 @@ class MapContainer extends Component {
             deletePath={this.deletePath}
             savePath = {this.savePath}
             loadPath = {this.loadPath}
-        /> : <Aside
-            activeButton={this.state.activeButton}
-            setButtonActive={this.setButtonActive}
-            deleteMarker={this.deleteMarker}
-            deleteLastPolylineCoord={this.deleteLastPolylineCoord}
-            deleteLastPosition={this.deleteLastPosition}
-            deleteArea={this.deleteArea}
-            deleteAllMarkers={this.deleteAllMarkers}
-            deletePath={this.deletePath}
-            savePath = {this.savePath}
-            loadPath = {this.loadPath}
-        />;
+        /> : this.props.history.push('/');
         return (
             <div className="mapPage">
                 {aside}
